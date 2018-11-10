@@ -1,10 +1,12 @@
 function faqer_query(client, message) {
+    var id_parts = client.id.split('-');
+    var chat_id = id_parts[id_parts.length - 1];
     $http.get($global.constants.faqerUrl, {
         query: {
             q:message,
-            chat_id: client.id,
+            chat_id: chat_id,
             message_id: client.message_id,
-            dialogue_id: client.id
+            dialogue_id: chat_id
         },
         dataType: "json"
     })
