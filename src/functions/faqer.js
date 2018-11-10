@@ -15,7 +15,7 @@ function faqer_query(client, message) {
             var answer = data.hypothesis[0].answer;
             var score = data.hypothesis[0].answerId;
 
-            if (score > threshold) {
+            if (score > +$global.constants.faqerThreshold) {
                 //cut link from answer
                 var words = answer.split(" ");
                 var link;
