@@ -36,13 +36,13 @@ function faqer_query(client, message) {
                     }]);
                 }
                 $reactions.answer(answer);
-                $reactions.transition("/faq");
+                $reactions.transition("/");
             } else {
                 $reactions.answer("Извините, я не нашёл ответ!");
             }
         })
         .catch(function (response, status, error) {
             $reactions.answer($global.errors.faqer);
-            $reactions.transition("/faq");
+            $reactions.transition("/");
         });
 }

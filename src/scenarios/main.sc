@@ -10,7 +10,7 @@ theme: /
         script:
             $client.id = $request.channelUserId;
         a: Здравствуйте! Чем я могу вам помочь?
-        go!: /faq
+        go!: /
 
     state: faq
         q!: *
