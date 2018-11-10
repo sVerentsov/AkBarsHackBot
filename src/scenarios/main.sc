@@ -8,7 +8,7 @@ theme: /
     state: start
         q: * ( *start | ping | привет | здравствуйте) *   
         a: Здравствуйте! Чем я могу вам помочь?
-        go!: /
+        go!: /faq
 
     state: faq
         q!: *
