@@ -23,6 +23,7 @@ theme:/
                     log(JSON.stringify(data));
                     if(data.success === true){
                         $client.card = data.card_number;
+                        $reactions.transition("../by_num/payment_complete");
                     } else {
                         $reactions.answer("Не удалось распознать карту, попробуйте ещё раз!");
                         $reactions.transition("..");
@@ -36,8 +37,14 @@ theme:/
         
         state: by_num
             q: * $CardNumber *
-            a: Хорошо, перевод на карту {{$parseTree.CardNumber}} совершён.
-            go!: NextState
+            script:
+                $client.card = $parseTree.CardNumber;
+            go!: ./payment_complete
+
+            state: payment_complete
+                a: Хорошо, перевод на карту {{$client.card}} совершён.
+                go!: /
+            
         
         state: catch
             q: *
