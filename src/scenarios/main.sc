@@ -10,11 +10,11 @@ theme: /
         script:
             $client.id = $request.channelUserId;
         a: Здравствуйте! Чем я могу вам помочь?
-        go!: /
+        go!: /faq
 
     state: faq
         q!: *
         script:
-            $client.message_id = $request.questionId;
+            $client.message_id = $request.rawRequest.message.message_id;
             faqer_query($client,$parseTree.text);
         go!: /
