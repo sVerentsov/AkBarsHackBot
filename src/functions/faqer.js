@@ -8,12 +8,9 @@ function faqer_query(client, message) {
         dataType: "json"
     })
         .then(function (data) {
-            client.results = data.results;
-
-            var question = data.results[0].question;
-            var id = data.results[0].document_id;
-            var answer = data.results[0].answer;
-            var score = data.results[0].score;
+            // var id = data.results[0].document_id;
+            var answer = data.hypothesis[0].answer;
+            var score = data.hypothesis[0].answerId;
 
             if (score > threshold) {
                 //cut link from answer
@@ -30,7 +27,7 @@ function faqer_query(client, message) {
 
                 //add link to button
                 if (button_exists == 1) {
-                    reactions.buttons([{
+                    $reactions.buttons([{
                         button: {
                             text: "Ссылка",
                             url: link,
@@ -38,13 +35,14 @@ function faqer_query(client, message) {
                         }
                     }]);
                 }
-                reactions.transition("/faq");
+                $reactions.answer(answer);
+                $reactions.transition("/faq");
             } else {
-                reactions.answer("No Answer Message");
+                $reactions.answer("Извините, я не нашёл ответ!");
             }
         })
         .catch(function (response, status, error) {
-            reactions.answer($global.errors.faqer);
-            reactions.transition("/faq");
+            $reactions.answer($global.errors.faqer);
+            $reactions.transition("/faq");
         });
 }
