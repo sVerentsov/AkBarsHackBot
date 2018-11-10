@@ -1,0 +1,7 @@
+name: akbarsassisstant
+
+entryPoint: scenarios/main.sc
+
+messages:
+    onError: 
+        defaultMessage: Извините, что-то сломалось. Попробуйте отправить "/start".
