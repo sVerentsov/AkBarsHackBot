@@ -2,6 +2,10 @@ name: akbarsassisstant
 
 entryPoint: scenarios/main.sc
 
+tests:
+  include:
+    - test.xml
+    
 messages:
     onError: 
         defaultMessage: Извините, что-то сломалось. Попробуйте отправить "/start".
