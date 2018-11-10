@@ -10,7 +10,8 @@ theme:/
             event: imageEvent
             event: fileEvent
             script: 
-                $client.image = $request.data.eventData.url;
+                var images = $request.rawRequest.photo;
+                $client.image = images[images.length].file_id;
                 log(JSON.stringify($request.data.eventData));
                 $http.post('http://89.223.27.150:9001/get_card_number', {
                     dataType : 'application/json',
