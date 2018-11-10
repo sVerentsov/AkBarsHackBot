@@ -12,6 +12,7 @@ function faqer_query(client, message) {
     })
         .then(function (data) {
             // var id = data.results[0].document_id;
+            log(JSON.stringify(data));
             var answer = data.hypothesis[0].answer;
             var score = data.hypothesis[0].answerId;
 
