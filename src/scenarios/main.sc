@@ -15,6 +15,6 @@ theme: /
     state: faq
         q!: *
         script:
-            message_id = $request.question_id;
-            faqer_query($client,$parseTree.text, message_id);
+            $client.message_id = $request.question_id;
+            faqer_query($client,$parseTree.text);
         go!: /

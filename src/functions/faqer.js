@@ -1,8 +1,8 @@
-function faqer_query(client, message, message_id) {
+function faqer_query(client, message) {
     $http.get($global.constants.faqerUrl, {
         query: {
             chat_id: client.id,
-            message_id: message_id,
+            message_id: client.message_id,
             dialog_id: message
         },
         dataType: "json"
