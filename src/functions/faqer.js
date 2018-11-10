@@ -1,5 +1,5 @@
 function faqer_query(client, message) {
-    http.get($global.constants.faqerUrl, {
+    $http.get($global.constants.faqerUrl, {
         query: {
             id: service_id,
             token: service_token,
