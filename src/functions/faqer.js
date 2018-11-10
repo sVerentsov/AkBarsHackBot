@@ -13,7 +13,7 @@ function faqer_query(client, message) {
         .then(function (data) {
             // var id = data.results[0].document_id;
             log(JSON.stringify(data));
-            var hypotheses = _.filter(data.hypothesis, function(ans) {return ans.answer.indexOf("{{") !== -1; });
+            var hypotheses = _.filter(data.hypothesis, function(ans) {return ans.answer.indexOf("{{") != -1; });
             log(JSON.stringify(hypotheses));
             if(hypotheses.length != 0)
             {
