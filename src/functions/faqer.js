@@ -4,7 +4,7 @@ function faqer_query(client, message) {
             q:message,
             chat_id: client.id,
             message_id: client.message_id,
-            dialog_id: client.id
+            dialogue_id: client.id
         },
         dataType: "json"
     })
