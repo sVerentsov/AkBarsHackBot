@@ -13,8 +13,11 @@ function faqer_query(client, message) {
         .then(function (data) {
             // var id = data.results[0].document_id;
             log(JSON.stringify(data));
-            var answer = data.hypothesis[0].answer;
-            var score = data.hypothesis[0].answerId;
+            var hypotheses = _.filter(data.hypothesis, function(ans) {return ans.answer.indexOf("{{") !== -1; });
+            hypotheses = _.sortBy(hypotheses, 'score');
+            var answer = hypotheses[hypotheses.length - 1].answer;
+            var id = hypotheses[hypotheses.length - 1].answerId;
+            var score = hypotheses[hypotheses.length - 1].score;
 
             if (score > +$global.constants.faqerThreshold) {
                 //cut link from answer
