@@ -16,5 +16,5 @@ theme: /
         q!: *
         script:
             $client.message_id = $request.rawRequest.message.message_id;
-            faqer_query($client,$parseTree.text);
+            faqer_query($client, $parseTree.text);
         go!: /
