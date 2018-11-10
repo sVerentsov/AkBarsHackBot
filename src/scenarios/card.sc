@@ -15,7 +15,7 @@ theme:/
                 $http.post('http://89.223.27.150:9001/get_card_number', {
                     dataType : 'application/json',
                     body : {
-                        "image_link":$client.image
+                        "image_link": $client.image
                     },
                     headers : {"content-type": "application/json;charset=utf-8"},
                 })

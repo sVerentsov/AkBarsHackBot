@@ -1,2 +1,2 @@
-faqerUrl: "http://65.52.140.60:4560/v2/ai/answer/?key=${q}&chat_id=${chat_id}&message_id=${message_id}&dialogue_id=${dialogue_id}"
+faqerUrl: "http://168.63.30.240/v2/ai/answer/?key=${q}&chat_id=${chat_id}&message_id=${message_id}&dialogue_id=${dialogue_id}"
 faqerThreshold: 0.9
