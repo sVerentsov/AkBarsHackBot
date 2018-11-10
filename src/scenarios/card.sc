@@ -19,8 +19,9 @@ theme:/
                     headers : {"content-type": "application/json;charset=utf-8"},
                 })
                 .then(function (data) {
+                    data = JSON.parse(data);
                     log(JSON.stringify(data));
-                    if(data.success){
+                    if(data.success === true){
                         $client.card = data.card_number;
                     } else {
                         $reactions.answer("Не удалось распознать карту, попробуйте ещё раз!");
