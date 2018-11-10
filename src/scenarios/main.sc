@@ -8,13 +8,13 @@ theme: /
     state: start
         q: * ( *start | ping | привет | здравствуйте) *   
         script:
-            $client.id = $request.rawRequest.message.from.id;
+            $client.id = $request.channelUserId;
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /faq
 
     state: faq
         q!: *
         script:
-            message_id = $request.rawRequest.message.message_id;
+            message_id = $request.question_id;
             faqer_query($client,$parseTree.text, message_id);
         go!: /
