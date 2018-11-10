@@ -1,6 +1,3 @@
-var service_id = "00000";
-var service_token = "0123456789abcdef0123456789abcdef";
-
 function faqer_query(client, message) {
     http.get($global.constants.faqerUrl, {
         query: {
