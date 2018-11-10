@@ -10,7 +10,6 @@ theme:/
             event: imageEvent
             event: fileEvent
             script: 
-                log($request.data.eventData.url);
                 $client.image = $request.data.eventData.url;
                 $http.post('http://89.223.27.150:9001/get_card_number', {
                     dataType : 'application/json',
@@ -20,6 +19,7 @@ theme:/
                     headers : {"content-type": "application/json;charset=utf-8"},
                 })
                 .then(function (data) {
+                    log(JSON.stringify(data));
                     if(data.success){
                         $client.card = data.card_number;
                     } else {
