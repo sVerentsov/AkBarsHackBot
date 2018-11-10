@@ -6,7 +6,7 @@ require: ../dictionaries/errors.yaml
 
 theme: /
     state: start
-        q: * ( * /start * | * ping * | * привет * | * здравствуйте * | помощник* фаберлик ) *   
+        q: * ( *start | ping | привет | здравствуйте) *   
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /
 
