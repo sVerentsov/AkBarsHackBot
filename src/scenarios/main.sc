@@ -4,6 +4,8 @@ require: ../dictionaries/constants.yaml
 require: ../dictionaries/errors.yaml
     var = errors
 
+require: card.sc
+
 theme: /
     state: start
         q: * ( *start | ping | привет | здравствуйте) *   
