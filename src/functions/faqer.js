@@ -1,9 +1,9 @@
-function faqer_query(client, message) {
+function faqer_query(client, message, message_id) {
     $http.get($global.constants.faqerUrl, {
         query: {
-            id: service_id,
-            token: service_token,
-            q: message
+            chat_id: client.id,
+            message_id: message_id,
+            dialog_id: message
         },
         dataType: "json"
     })
@@ -38,13 +38,13 @@ function faqer_query(client, message) {
                         }
                     }]);
                 }
-                reactions.transition("Next State");
+                reactions.transition("/faq");
             } else {
                 reactions.answer("No Answer Message");
             }
         })
         .catch(function (response, status, error) {
-            reactions.answer("Reason8 Error Message");
-            reactions.transition("Reason8 Error State");
+            reactions.answer($global.errors.faqer);
+            reactions.transition("/faq");
         });
 }
