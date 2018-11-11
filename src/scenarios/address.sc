@@ -23,15 +23,15 @@ theme: /
             script:
                 $client.address = $parseTree.text.split($parseTree.Intro[0].text)[1];
             if: $parseTree.City[0].value.name == "Метро"
-                go!: /city    
+                script:
+                    $client.address = "Казань" + $parseTree.text.split($parseTree.Intro[0].text)[1];
             go!: /search
         
         state:
             q: * $City *
             if: $parseTree.City[0].value.name == "Метро"
                 script:
-                    $client.address = " " + $parseTree.text;
-                go!: /city
+                    $client.address = "Казань " + $parseTree.text;
             script:
                 $client.address = $parseTree.City[0].value.name + $parseTree.text.split($parseTree.City[0].text)[1];
             go!: /search
@@ -39,14 +39,14 @@ theme: /
         state:
             q: * $Intro *
             script:
-                $client.address = $parseTree.text.split($parseTree.Intro[0].text)[1];
-            go!: /city
+                $client.address = "Казань " + $parseTree.text.split($parseTree.Intro[0].text)[1];
+            go!: /search
 
         state:
             q: *
             script:
-                $client.address = " " + $parseTree.text;
-            go!: /city
+                $client.address = "Казань " + $parseTree.text;
+            go!: /search
                 
     state: city
         if: $client.X == 0
