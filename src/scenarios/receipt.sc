@@ -17,7 +17,6 @@
                         dataType : 'application/json',
                         body : {
                             "image_id": $client.image,
-                            "hardcode": "sasdk"
                         },
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
