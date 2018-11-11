@@ -4,7 +4,7 @@ patterns:
 theme:/
     state: card
         q: * перев* * карт* *
-        if: $request.channelType != 'telegram':
+        if: $request.channelType != 'telegram'
             a: Чтобы перевести деньги на другую карту, воспользуйтесь нашим приложением или банкоматом. 
             go!: /
         a: Пришлите фотографию карты или её номер.
