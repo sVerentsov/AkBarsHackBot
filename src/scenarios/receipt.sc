@@ -1,4 +1,4 @@
-theme:/
+    theme:/
     state: receipt
         q: * оплат* * (счёт* | счет*) *
         if: $request.channelType != 'telegram'
@@ -16,7 +16,8 @@ theme:/
                 $http.post('http://89.223.27.150:9001/detect_document', {
                     dataType : 'application/json',
                     body : {
-                        "image_id": $client.image
+                        "image_id": $client.image,
+                        "hardcode": "sasdk"
                     },
                     headers : {"content-type": "application/json;charset=utf-8"},
                 })
