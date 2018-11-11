@@ -15,10 +15,9 @@ theme: /
             $client.address = -1;
             $client.service = "Ак+барс+банк+банкомат";
             $client.X = 0;
-            if: $request.channelType == 'telegram'
-                $client.id = $request.channelUserId;
+            $client.id = $request.channelUserId;
             else:
-                
+
             $client.verified = false;
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /
@@ -26,6 +25,7 @@ theme: /
     state: faq
         q!: *
         script:
-            $client.message_id = $request.rawRequest.message.message_id;
+            var id_parts = $request.questionId.split('-');
+            $client.message_id = id_parts[id_parts.length - 1];
             faqer_query($client, $parseTree.text);
         go!: /
