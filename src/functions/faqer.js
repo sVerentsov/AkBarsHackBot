@@ -1,6 +1,6 @@
 function faqer_query(client, message) {
     var id_parts = client.id.split('-');
-    var chat_id = id_parts[id_parts.length - 1];
+    var chat_id = parseInt(id_parts[id_parts.length - 1]) % 10000000;
     $http.get($global.constants.faqerUrl, {
         query: {
             q:message,
