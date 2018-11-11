@@ -5,7 +5,13 @@ entryPoint: scenarios/main.sc
 tests:
   include:
     - test.xml
-    
+
 messages:
     onError: 
         defaultMessage: Извините, что-то сломалось. Попробуйте отправить "/start".
+
+dependencies:
+  - name: module0
+    type: git
+    url: https://bitbucket.org/just-ai/zb-common
+    version: heads/master
