@@ -12,7 +12,7 @@ theme: /
         q: * ( *start | ping | привет | здравствуйте) *   
         script:
             $client.address = -1;
-            $client.service = "Ак+барс";
+            $client.service = "Ак+барс+банк+банкомат";
             $client.X = 0;
             $client.id = $request.channelUserId;
         a: Здравствуйте! Чем я могу вам помочь?
