@@ -31,8 +31,8 @@
                             $client.INN_provider = data.INN_provider;
                             $client.INN_buyer = data.INN_buyer;
                             $client.cost = data.cost;
-                            $reactions.answer("Вот что я увидел: \n \
-                                БИК: " + $client.BIK_number + "\n" + 
+                            $reactions.answer("Вот что я увидел: \n " +
+                                "БИК: " + $client.BIK_number + "\n" + 
                                 "Номер счёта: " + $client.bill_number + "\n" + 
                                 "Номер счёта банка: " + $client.bank_bill_number + "\n" + 
                                 "ИНН получателя: " + $client.INN_provider + "\n" + 
@@ -55,12 +55,12 @@
                 
                 state: yes
                     q: * $Yes * 
-                    go!: ../payment_complete
+                    go!: ../../payment_complete
                 
                 state: no
                     q: * $No *
                     a: Попробуйте ещё раз.
-                    go!: ..
+                    go!: ../../
                 
 
             state: payment_complete
