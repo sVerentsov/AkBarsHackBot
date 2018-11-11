@@ -22,6 +22,7 @@ theme:/
                     log(JSON.stringify(data));
                     if(data.is_matches_chat_id === true){
                         $client.verified = true;
+                        $reactions.answer("Верификация пройдена.");
                         $reactions.transition($client.prev_state);
                     } else {
                         $reactions.answer("Не удалось пройти верификацию. Попробуйте ещё раз.");
