@@ -9,7 +9,7 @@ require: address.sc
 
 theme: /
     state: start
-        q: * ( *start | ping | привет | здравствуйте) *   
+        q: * ( *start | ping | привет | здравствуйте | в начало ) *   
         script:
             $client.address = -1;
             $client.service = "Ак+барс+банк+банкомат";
