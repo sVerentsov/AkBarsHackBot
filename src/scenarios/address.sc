@@ -81,7 +81,7 @@ theme: /
                 
                 $http.get("https://search-maps.yandex.ru/v1/?apikey=80829e94-2033-43e4-8f5f-e630bd1377b0&text=" + $client.service + "&type=biz&lang=ru_RU&ll=" + point + "&spn=0.0005,0.0005", {timeout : 1250})
                 .then(function(data) {
-                    $reactions.answer('Ближайшее отделение находится по адресу ' + JSON.stringify(data.features[0].properties.CompanyMetaData.address).replace(/"/g, "") + '. ');
+                    $reactions.answer('Ближайший банкомат находится по адресу ' + JSON.stringify(data.features[0].properties.CompanyMetaData.address).replace(/"/g, "") + '. ');
                 })
                 .catch(function() {
                     $reactions.answer('Простите, произошла внутренняя ошибка, пожалуйста, перезвоните позже.');
