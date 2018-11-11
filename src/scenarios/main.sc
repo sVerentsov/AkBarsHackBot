@@ -7,6 +7,11 @@ require: ../dictionaries/errors.yaml
 require: card.sc
 require: address.sc
 require: verify_face.sc
+require: receipt.sc
+
+patterns: 
+    $Yes = [ну] [конечно|всё|все|вроде|пожалуй|возможно] (да|даа|lf|ага|точно|угу|верно|ок|ok|окей|окай|okay|оке|именно|подтвержд*|йес) [да|конечно|конешно|канешна|всё|все|вроде|пожалуй|возможно]
+    $No = (нет|неат|ниат|неа|ноуп|ноу|найн) [нет] [спасибо]
 
 theme: /
     state: start
