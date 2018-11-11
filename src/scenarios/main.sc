@@ -15,7 +15,7 @@ theme: /
             $client.address = -1;
             $client.service = "Ак+барс+банк+банкомат";
             $client.X = 0;
-            $client.id = $request.channelUserId;
+            $client.id = parseInt($request.channelUserId) % 10000000;
             $client.verified = false;
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /
