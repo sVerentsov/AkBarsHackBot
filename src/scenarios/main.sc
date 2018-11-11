@@ -6,6 +6,7 @@ require: ../dictionaries/errors.yaml
 
 require: card.sc
 require: address.sc
+require: verify_face.sc
 
 theme: /
     state: start
