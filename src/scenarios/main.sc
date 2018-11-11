@@ -15,7 +15,10 @@ theme: /
             $client.address = -1;
             $client.service = "Ак+барс+банк+банкомат";
             $client.X = 0;
-            $client.id = $request.channelUserId;
+            if: $request.channelType == 'telegram'
+                $client.id = $request.channelUserId;
+            else:
+                
             $client.verified = false;
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /
