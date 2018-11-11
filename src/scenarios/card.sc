@@ -44,11 +44,12 @@ theme:/
             q: * $CardNumber *
             script:
                 $client.card = $parseTree.CardNumber;
+            a: Карта {{$client.card}}.
             go!: ./payment_complete
 
             state: payment_complete
                 if: $client.verified === true
-                    a: Хорошо, перевод на карту {{$client.card}} совершён.
+                    a: Хорошо, перевод на карту совершён.
                 else: 
                     script: $client.prev_state = "/card/by_num/payment_complete";
                     go!: /verify
