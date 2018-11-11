@@ -11,7 +11,7 @@ patterns:
     $Intro = (адрес*|нахожусь|находимся|на|город*|станци*)
     
 theme: /
-    state: search
+    state: address
         q: * (снять | банкомат* ) * 
         if: $client.X == 0
             a: Назовите, пожалуйста, город и адрес вашего местоположения.
@@ -74,14 +74,14 @@ theme: /
             .then(function(data) {
                 if (data.response.GeoObjectCollection.featureMember.length == 0) {
                     $client.X = 1;
-                    $reactions.transition("/search");
+                    $reactions.transition("/address");
                 }
                 var point = JSON.stringify(data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos).replace(" ", ",");
                 point = point.replace(/"/g, "");
                 
                 $http.get("https://search-maps.yandex.ru/v1/?apikey=80829e94-2033-43e4-8f5f-e630bd1377b0&text=" + $client.service + "&type=biz&lang=ru_RU&ll=" + point + "&spn=0.0005,0.0005", {timeout : 1250})
                 .then(function(data) {
-                    $reactions.answer('Ближайшее отделение находится по адресу ' + JSON.stringify(data.features[0].properties.CompanyMetaData.address).replace(/"/g, "") + '. ';
+                    $reactions.answer('Ближайшее отделение находится по адресу ' + JSON.stringify(data.features[0].properties.CompanyMetaData.address).replace(/"/g, "") + '. ');
                 })
                 .catch(function() {
                     $reactions.answer('Простите, произошла внутренняя ошибка, пожалуйста, перезвоните позже.');
@@ -89,5 +89,5 @@ theme: /
             })
             .catch(function() {
                 $client.X = 1;
-                $reactions.transition("/search");
+                $reactions.transition("/address");
             });
