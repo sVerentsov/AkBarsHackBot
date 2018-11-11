@@ -30,7 +30,7 @@
                             $client.INN_provider = data.INN_provider;
                             $client.INN_buyer = data.INN_buyer;
                             $client.cost = data.cost;
-                            $reactions.answer("Вот что я увидел: \n " +
+                            $reactions.answer("Вот что я увидел: \n" +
                                 "БИК: " + $client.BIK_number + "\n" + 
                                 "Номер счёта: " + $client.bill_number + "\n" + 
                                 "Номер счёта банка: " + $client.bank_bill_number + "\n" + 
