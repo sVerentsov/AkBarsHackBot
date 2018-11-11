@@ -60,7 +60,11 @@
                     q: * $No *
                     a: Попробуйте ещё раз.
                     go!: ../../
-                
+
+                state: catch 
+                    q: *
+                    a: Простите, я не понял.
+                    go!: ..               
 
             state: payment_complete
                 if: $client.verified === true
