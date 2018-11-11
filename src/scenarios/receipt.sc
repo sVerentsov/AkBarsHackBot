@@ -55,7 +55,7 @@
                 
                 state: yes
                     q: * $Yes * 
-                    go: ../payment_complete
+                    go!: ../payment_complete
                 
                 state: no
                     q: * $No *
