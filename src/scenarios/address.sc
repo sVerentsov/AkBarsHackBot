@@ -12,7 +12,7 @@ patterns:
     
 theme: /
     state: address
-        q: * (снять | банкомат* ) * 
+        q: * (где | ближ*) * (снять | положить | банкомат* ) * 
         if: $client.X == 0
             a: Назовите, пожалуйста, город и адрес вашего местоположения.
         else:
@@ -24,7 +24,7 @@ theme: /
                 $client.address = $parseTree.text.split($parseTree.Intro[0].text)[1];
             if: $parseTree.City[0].value.name == "Метро"
                 script:
-                    $client.address = "Казань" + $parseTree.text.split($parseTree.Intro[0].text)[1];
+                    $client.address = "Казань " + $parseTree.text.split($parseTree.Intro[0].text)[1];
             go!: /search
         
         state:
