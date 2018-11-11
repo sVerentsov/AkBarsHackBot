@@ -15,6 +15,7 @@ theme: /
             $client.service = "Ак+барс+банк+банкомат";
             $client.X = 0;
             $client.id = $request.channelUserId;
+            $client.verified = false;
         a: Здравствуйте! Чем я могу вам помочь?
         go!: /
 

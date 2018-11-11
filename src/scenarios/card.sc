@@ -44,7 +44,11 @@ theme:/
             go!: ./payment_complete
 
             state: payment_complete
-                a: Хорошо, перевод на карту {{$client.card}} совершён.
+                if: $client.verified === true
+                    script: $client.prev_state = "/card/by_num/payment_complete";
+                    a: Хорошо, перевод на карту {{$client.card}} совершён.
+                else: 
+                    go!: /verify
                 go!: /
             
         
