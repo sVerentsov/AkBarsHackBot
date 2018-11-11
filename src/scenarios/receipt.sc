@@ -1,6 +1,3 @@
-patterns:
-    $CardNumber = $regexp<(\d{16}|\d{4} \d{4} \d{4} \d{4})>
-
 theme:/
     state: receipt
         q: * оплат* * (счёт* | счет*) *
