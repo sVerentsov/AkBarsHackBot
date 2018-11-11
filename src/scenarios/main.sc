@@ -24,6 +24,6 @@ theme: /
         q!: *
         script:
             var id_parts = $request.questionId.split('-');
-            $client.message_id = id_parts[id_parts.length - 1];
+            $client.message_id = parseInt(id_parts[id_parts.length - 1], 16);
             faqer_query($client, $parseTree.text);
         go!: /
