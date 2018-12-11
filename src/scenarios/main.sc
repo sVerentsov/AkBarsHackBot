@@ -17,18 +17,68 @@ theme: /
     state: start
         q: * ( *start | ping | привет | здравствуйте | в начало ) *   
         script:
-            $client.address = -1;
-            $client.service = "Ак+барс+банк+банкомат";
-            $client.X = 0;
             $client.id = $request.channelUserId;
-            $client.verified = false;
-        a: Здравствуйте! Чем я могу вам помочь?
-        go!: /
+            var user_exists = check_user_exists($client.id);
+        if: user_exists == true
+            a: Пройдите авторизацию! Загрузите фото или запись голоса (файлом, а не голосовым сообщением)
+            go!: /start/auth
+        else: 
+            go!: /start/signup
 
-    state: faq
-        q!: *
-        script:
-            var id_parts = $request.questionId.split('-');
-            $client.message_id = parseInt(id_parts[id_parts.length - 1], 16) % 1000000;
-            faqer_query($client, $parseTree.text);
-        go!: /
+        state: signup
+            a: Вы первый раз в этом боте. Пришлите ваши данные авторизации: одно видео или аудиозаписи вашего голоса (файлом, не голосовым сообщением)
+
+            state: load_file
+                event: fileEvent
+                script: 
+                    var images = $request.rawRequest.message.photo;
+                    $client.image = images[images.length - 1].file_id;
+                    log(JSON.stringify($request.data.eventData));
+                    $http.post('http://89.223.27.150:9001/add_reference_file', {
+                        dataType : 'application/json',
+                        body : {
+                            "user_id": $client.id,
+                            "file_id": $client.image
+                        },
+                        headers : {"content-type": "application/json;charset=utf-8"},
+                    })
+                    .then(function (data) {
+                        $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
+                    })
+                    .catch(function (response, status, error) {
+                        $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
+                        $reactions.answer(JSON.stringify(error));
+                        $reactions.transition("..");
+                    });
+
+        state: auth
+            a: Пройдите авторизацию! Загрузите фото или запись голоса (файлом, а не голосовым сообщением)
+
+            state: load_file
+                event: fileEvent
+                script: 
+                    var images = $request.rawRequest.message.photo;
+                    $client.image = images[images.length - 1].file_id;
+                    log(JSON.stringify($request.data.eventData));
+                    $http.post('http://89.223.27.150:9001/authenticate', {
+                        dataType : 'application/json',
+                        body : {
+                            "user_id": $client.id,
+                            "file_id": $client.image
+                        },
+                        headers : {"content-type": "application/json;charset=utf-8"},
+                    })
+                    .then(function (data) {
+                        if(data.success) {
+                            $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
+                        } else {
+                            $reactions.answer("Это не вы. Попробуйте ещё раз.");
+                        }
+
+                    })
+                    .catch(function (response, status, error) {
+                        $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
+                        $reactions.answer(JSON.stringify(error));
+                        $reactions.transition("..");
+                    });
+
