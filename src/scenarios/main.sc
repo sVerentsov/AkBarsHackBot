@@ -46,8 +46,10 @@ theme: /
                     var file;
                     if ("video" in $request.rawRequest.message) {
                         file = $request.rawRequest.message.video;
+                        $client.type = "video";
                     } else {
                         file = $request.rawRequest.message.audio;
+                        $client.type = "audio";
                     }
                     $client.file_id = file.file_id;
                     log(JSON.stringify($request.data.eventData));
@@ -55,12 +57,13 @@ theme: /
                         dataType : 'application/json',
                         body : {
                             "user_id": $client.id,
+                            "type": $client.type,
                             "file_id": $client.file_id
                         },
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
-                        
+
                         if(data.success == true) {
                             $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
                         } else {
@@ -82,14 +85,17 @@ theme: /
                     var file;
                     if ("video" in $request.rawRequest.message) {
                         file = $request.rawRequest.message.video;
+                        $client.type = "video";
                     } else {
                         file = $request.rawRequest.message.audio;
+                        $client.type = "audio";
                     }
                     $client.file_id = file.file_id;
                     $http.post('http://bugulma.eora.ru:9779/authenticate', {
                         dataType : 'application/json',
                         body : {
                             "user_id": $client.id,
+                            "type": $client.type,
                             "file_id": $client.file_id
                         },
                         headers : {"content-type": "application/json;charset=utf-8"},
