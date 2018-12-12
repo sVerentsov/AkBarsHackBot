@@ -15,8 +15,8 @@ theme: /
         q: * ( *start | ping | привет | здравствуйте | в начало ) *   
         script:
             $client.id = $request.channelUserId;
-            var user_exists = check_user_exists($client.id);
-        if: user_exists == true
+            $client.user_exists = check_user_exists($client.id);
+        if: $client.user_exists == true
             a: Пройдите авторизацию! Загрузите фото или запись голоса (файлом, а не голосовым сообщением)
             go!: /start/auth
         else: 
