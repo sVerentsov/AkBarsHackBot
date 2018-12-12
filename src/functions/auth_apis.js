@@ -8,8 +8,9 @@ function check_user_exists(id)
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
-                        log(Object.keys(data));
-                        return JSON.parse(data).user_exists;
+                        log(type(data));
+                        log(Object.keys(JSON.parse(data)));
+                        return data.user_exists;
                     })
                     .catch(function (response, status, error) {
                         $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
