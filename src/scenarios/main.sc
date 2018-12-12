@@ -17,7 +17,7 @@ theme: /
             $http.post('http://bugulma.eora.ru:9779/check_user_exists', {
                                 dataType : 'application/json',
                                 body : {
-                                    "user_id": id
+                                    "user_id": $client.id
                                 },
                                 headers : {"content-type": "application/json;charset=utf-8"},
                             })
