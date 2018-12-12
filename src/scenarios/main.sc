@@ -60,6 +60,7 @@ theme: /
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
+                        
                         if(data.success == true) {
                             $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
                         } else {
