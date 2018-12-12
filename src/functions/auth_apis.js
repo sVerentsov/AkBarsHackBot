@@ -8,6 +8,7 @@ function check_user_exists(id)
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
+                        log(Object.keys(data));
                         return JSON.parse(data).user_exists;
                     })
                     .catch(function (response, status, error) {
