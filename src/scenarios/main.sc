@@ -1,4 +1,3 @@
-require: ../functions/auth_apis.js
 require: ../dictionaries/constants.yaml
     var = constants
 require: ../dictionaries/errors.yaml
