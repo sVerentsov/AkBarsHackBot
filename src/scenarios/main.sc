@@ -31,7 +31,7 @@ theme: /
                     var images = $request.rawRequest.message.photo;
                     $client.image = images[images.length - 1].file_id;
                     log(JSON.stringify($request.data.eventData));
-                    $http.post('http://89.223.27.150:9001/add_reference_file', {
+                    $http.post('http://bugulma.eora.ru:9779/add_reference_file', {
                         dataType : 'application/json',
                         body : {
                             "user_id": $client.id,
@@ -57,7 +57,7 @@ theme: /
                     var images = $request.rawRequest.message.photo;
                     $client.image = images[images.length - 1].file_id;
                     log(JSON.stringify($request.data.eventData));
-                    $http.post('http://89.223.27.150:9001/authenticate', {
+                    $http.post('http://bugulma.eora.ru:9779/authenticate', {
                         dataType : 'application/json',
                         body : {
                             "user_id": $client.id,
