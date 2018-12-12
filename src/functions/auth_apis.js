@@ -9,6 +9,7 @@ function check_user_exists(id)
                     })
                     .then(function (data) {
                         data = JSON.parse(data);
+                        log(data.user_exists);
                         return data.user_exists;
                     })
                     .catch(function (response, status, error) {
