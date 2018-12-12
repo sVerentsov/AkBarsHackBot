@@ -94,6 +94,7 @@ theme: /
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
+                        data = JSON.parse(data);
                         if(data.success == true) {
                             $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
                         } else {
