@@ -45,7 +45,11 @@ theme: /
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
-                        $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
+                        if(data.success) {
+                            $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
+                        } else {
+                            $reactions.answer(JSON.stringify(data));
+                        }
                     })
                     .catch(function (response, status, error) {
                         $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
