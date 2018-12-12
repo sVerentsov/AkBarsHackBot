@@ -16,6 +16,7 @@ theme: /
         script:
             $client.id = $request.channelUserId;
             $client.user_exists = check_user_exists($client.id);
+            log($client.user_exists);
         if: $client.user_exists == true
             a: Пройдите авторизацию! Загрузите фото или запись голоса (файлом, а не голосовым сообщением)
             go!: /start/auth
@@ -45,7 +46,7 @@ theme: /
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
-                        if(data.success) {
+                        if(data.success == true) {
                             $reactions.answer("Отлично! Добавьте ещё записи голоса или нажмите /start, чтобы попробовать авторизоваться!");
                         } else {
                             $reactions.answer(JSON.stringify(data));
@@ -79,10 +80,10 @@ theme: /
                         headers : {"content-type": "application/json;charset=utf-8"},
                     })
                     .then(function (data) {
-                        if(data.success) {
+                        if(data.success == true) {
                             $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
                         } else {
-                            $reactions.answer("Это не вы. Попробуйте ещё раз.");
+                            $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
                         }
 
                     })
