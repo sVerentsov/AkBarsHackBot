@@ -106,7 +106,7 @@ theme: /
                             $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
                         } else {
                             $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
-                            $reactions.button("Зарегистрироваться заново");
+                            $reactions.buttons("Зарегистрироваться заново");
                         }
 
                     })
