@@ -105,6 +105,10 @@ theme: /
                         if(data.success == true) {
                             $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
                         } else {
+                            if("error" in data)
+                            {
+                                $reactions.answer(data['error']);
+                            }
                             $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
                             $reactions.buttons("Зарегистрироваться заново");
                         }
