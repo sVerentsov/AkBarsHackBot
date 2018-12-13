@@ -106,6 +106,7 @@ theme: /
                             $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
                         } else {
                             $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
+                            $reactions.button("Зарегистрироваться заново");
                         }
 
                     })
@@ -115,3 +116,29 @@ theme: /
                         $reactions.transition("..");
                     });
 
+    state: reset
+        q: * Зарегистрироваться заново *
+        script:
+            $http.post('http://bugulma.eora.ru:9779/restart', {
+                                    dataType : 'application/json',
+                                    body : {
+                                        "user_id": $client.id
+                                    },
+                                    headers : {"content-type": "application/json;charset=utf-8"},
+                                })
+                                .then(function (data) {
+                                    data = JSON.parse(data);
+                                    if(data.success == true) {
+                                        $reactions.answer("Ваши данные для авторизации стёрты.");
+                                        $reactions.transition("/start/signup");
+                                    } else {
+                                        $reactions.answer("Что-то пошло не так");
+                                        $reactions.answer(JSON.stringify(data));
+                                    }
+                                })
+                                .catch(function (response, status, error) {
+                                    $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
+                                    $reactions.answer(JSON.stringify(error));
+                                    $reactions.transition("..");
+                                    $client.user_exists = false;
+                                });
