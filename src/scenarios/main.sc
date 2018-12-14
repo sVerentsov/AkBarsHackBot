@@ -86,42 +86,48 @@ theme: /
                     if ("video" in $request.rawRequest.message) {
                         file = $request.rawRequest.message.video;
                         $client.type = "video";
-                    } else {
+                    } else if ("audio" in $request.rawRequest.message) {
                         file = $request.rawRequest.message.audio;
                         $client.type = "audio";
+                    } else {
+                        file = false;
+                        $reactions.answer("Этот тип сообщений не поддерживается");
                     }
-                    $client.file_id = file.file_id;
-                    $http.post('http://bugulma.eora.ru:9779/authenticate', {
-                        dataType : 'application/json',
-                        body : {
-                            "user_id": $client.id,
-                            "type": $client.type,
-                            "file_id": $client.file_id
-                        },
-                        headers : {"content-type": "application/json;charset=utf-8"},
-                    })
-                    .then(function (data) {
-                        data = JSON.parse(data);
-                        if(data.success == true) {
-                            $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
-                        } else {
-                            if("error" in data)
-                            {
-                                $reactions.answer(data['error']);
+                    if(file != false)
+                    {
+                        $client.file_id = file.file_id;
+                        $http.post('http://bugulma.eora.ru:9779/authenticate', {
+                            dataType : 'application/json',
+                            body : {
+                                "user_id": $client.id,
+                                "type": $client.type,
+                                "file_id": $client.file_id
+                            },
+                            headers : {"content-type": "application/json;charset=utf-8"},
+                        })
+                        .then(function (data) {
+                            data = JSON.parse(data);
+                            if(data.success == true) {
+                                $reactions.answer("Привет, " + $request.rawRequest.message.from.first_name + "! Нажмите /start, чтобы попробовать ещё раз");
+                            } else {
+                                if("error" in data)
+                                {
+                                    $reactions.answer(data['error']);
+                                }
+                                $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
+                                $reactions.buttons("Зарегистрироваться заново");
                             }
-                            $reactions.answer("Авторизация не удалась. Попробуйте ещё раз.");
-                            $reactions.buttons("Зарегистрироваться заново");
-                        }
 
-                    })
-                    .catch(function (response, status, error) {
-                        $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
-                        $reactions.answer(JSON.stringify(error));
-                        $reactions.transition("..");
-                    });
+                        })
+                        .catch(function (response, status, error) {
+                            $reactions.answer("Сервис распознавания не отвечает, попробуйте позже.");
+                            $reactions.answer(JSON.stringify(error));
+                            $reactions.transition("..");
+                        });
+                    }
 
     state: reset
-        q: * Зарегистрироваться заново *
+        q: * (Зарегистрироваться заново|*reset) *
         script:
             $http.post('http://bugulma.eora.ru:9779/restart', {
                                     dataType : 'application/json',
